@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-6kup$v4sw41t6a4$3(dxpxvj-y^r&cf#87w)_sg^fo7(%s&ua6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['http://127.0.0.1:8000/','https://ewawe-pms-dashboard.herokuapp.com/']
 
 
 # Application definition

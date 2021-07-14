@@ -1,1 +1,1 @@
-web: gunicorn ewawedashboard.wsgi
+web: gunicorn EwaweDashboard.wsgi

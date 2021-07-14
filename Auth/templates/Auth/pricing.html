@@ -1,0 +1,199 @@
+{% load static %}
+<!doctype html>
+<html class="no-js " lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>:: Ewawe  Smart Parking </title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- Favicon-->
+<link rel="stylesheet" href="{%static 'assets/plugins/bootstrap/css/bootstrap.min.css'%}">
+<!-- Custom Css -->
+<link rel="stylesheet" href="{%static 'assets/css/amaze.style.min.css'%}">
+</head>
+<body class="font-ubuntu">
+
+<div id="body" class="theme-cyan">
+
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="mt-3"><img class="zmdi-hc-spin w60" src="{%static 'assets/images/loader.svg'%}" alt="Amaze"></div>
+            <p>Please wait...</p>        
+        </div>
+    </div>
+
+    <div class="overlay"></div>
+   <!-- Top Bar -->
+   <nav class="top_navbar">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="navbar-logo">
+                        <a href="javascript:void(0);" class="bars"></a>
+                        <a class="navbar-brand" href="index.html"><img src="{%static 'assets/images/logo.svg'%}" width="30" alt="Amaze"><span class="ml-2">Ewawe  Smart Parking</span></a>
+                    </div>
+                    <div class="d-flex justify-content-end justify-content-md-between align-items-center flex-grow-1">
+                        <div class="d-flex align-items-center currently_maintain hidden-xs">
+                            <div class="dropdown">
+                            
+                            </div>
+                        </div>
+                        <ul class="navbar">
+                            <li class="search_bar hidden-sm">
+                                <div class="input-group">
+                                    <i class="icon-magnifier"></i>
+                                    <input type="text" class="form-control" placeholder="Find your ...">
+                                </div>
+                            </li>                     
+                            <li class="dropdown profile">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                                    <img class="rounded-circle" src="{%static 'assets/images/profile_av.png'%}" alt="User">
+                                </a>
+                                <ul class="dropdown-menu">                           
+                                    <li><a href="index.html"><i class="icon-power mr-2"></i><span>Sign Out</span></a></li>
+                                </ul>
+                            </li>
+                            <li><a href="javascript:void(0);" class="js-right-sidebar"><i class="icon-equalizer"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+</nav>
+
+<aside id="leftsidebar" class="sidebar">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-12">
+                <div class="menu">
+                    <ul class="list">
+                        <li class="header">MAIN</li>
+                        <li class="active open">
+                            <a href="dashboard.html" class="menu-toggle"><span>Dashboard</span></a>          
+                        </li>
+                        <li>
+                            <a href="pricing.html" class="menu-toggle"><span>Parking Tarrif</span></a>
+                    
+                        </li>
+                        <li>
+                            <a href="today.html" class="menu-toggle"><span>Current Parking</span></a>
+                
+                        </li>
+                        <li>
+                            <a href="all_vehicle.html" class="menu-toggle"><span>Parking History</span></a>
+                
+                        </li>
+                        <li>
+                            <a href="user.html" class="menu-toggle"><span>User Management</span></a>
+                          
+                        </li>               
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>
+
+   
+    <!-- Main Content -->
+    <div class="body_area">
+
+    
+        <div class="container pt-5">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="header">
+                            <button class="btn btn-primary mb-3"     data-toggle="modal" data-target="#defaultModal"> <i class="zmdi zmdi-plus"></i> Add New</button>  
+                            <h2><strong>Parking Pricing</strong> <small>All Parking Pricing Details</small> </h2>                       
+                        </div>
+                        <div class="body">
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Time From</th>
+                                            <th>Time To</th>
+                                            <th>Cost</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>0 h </td>
+                                            <td>1 h </td>
+                                            <td>200 Rwf</td>
+                                        </tr>
+                                         <tr>
+                                            <th scope="row">2</th>
+                                            <td>1 h </td>
+                                            <td>2 h </td>
+                                            <td>300 Rwf</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td>2 h </td>
+                                            <td>4 h </td>
+                                            <td>500 Rwf</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal Dialogs ========= --> 
+    <!-- Default Size -->
+    <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="title" id="defaultModalLabel"> Add New Pricing</h4>
+                </div>
+                <div class="modal-body"> 
+                    <div class="col-sm-12">
+                        <div class="form-group col-sm-12">                                    
+                            <input type="number" class="form-control" placeholder="Enter time from">
+                        </div>
+                        <div class="form-group col-sm-12">                                    
+                            <input type="number" class="form-control" placeholder="Enter time to ">
+                        </div>
+                        <div class="form-group col-sm-12">                                    
+                            <input type="number" class="form-control" placeholder="Enter cost ">
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary waves-effect">Save Changes</button>
+                    <button type="button" class="btn btn-danger btn-simple waves-effect" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+</div>
+
+
+<!-- Jquery Core Js --> 
+<script src="{%static 'assets/bundles/libscripts.bundle.js'%}"></script> <!-- Lib Scripts Plugin Js --> 
+<script src="{%static 'assets/bundles/vendorscripts.bundle.js'%}"></script> <!-- Lib Scripts Plugin Js --> 
+
+<script src="{%static 'assets/bundles/mainscripts.bundle.js'%}"></script><!-- Custom Js --> 
+</body>
+</html>

@@ -14,6 +14,12 @@ def login_page(request):
     return render(request, 'Auth/index.html')
 
 def dashboard_page(request):
+    context = dict
+    with conn.cursor() as cursor:
+        cursor.execute("""SELECT  "Date", "PlateNum", "EntryGateId", "CheckinTime", "CheckoutTime", "ExitGateId", "Status", "Duration", "Cash"
+                          FROM public."ParkingLog"
+                          WHERE "CustomerId" = 'EGPCI-AAA01-0001';""")
+                          
     return render(request, 'Auth/dashboard.html')
 
 def all_vehicle_page(request):
@@ -22,14 +28,22 @@ def all_vehicle_page(request):
         cursor.execute("""SELECT  "Date", "PlateNum", "EntryGateId", "CheckinTime", "CheckoutTime", "ExitGateId", "Status", "Duration", "Cash"
                           FROM public."ParkingLog"
                           WHERE "CustomerId" = 'EGPCI-AAA01-0001';""")
+        
+        ParkingLogs = list
         for i in cursor.fetchall():
             ParkingLog = {"Date": i[0]}
-            ParkingLog['PlateNum'] = i[1]
+            ParkingLog['platenum'] = i[1]
+            ParkingLog['entrygate'] = i[2]
+            ParkingLog['checkintime'] = i[3]
+            ParkingLog['checkouttime'] = i[4]
+            ParkingLog['exitgate'] = i[5]
+            ParkingLog['status'] = i[6]
+            ParkingLog['duration'] = i[7]
+            ParkingLog['cash'] = i[8]
             
-    
-        
-        
-    return render(request, 'Auth/all_vehicle.html')
+            ParkingLogs.append(ParkingLog)  
+    context = {"ParkingLogs":[ParkingLogs]}         
+    return render(request, 'Auth/all_vehicle.html', context)
 
 def pricing_page(request):
     context = dict

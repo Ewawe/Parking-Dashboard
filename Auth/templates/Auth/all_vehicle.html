@@ -127,22 +127,42 @@
                                             <th>Checkin time</th>
                                             <th>Checkout Time</th>
                                             <th>Exit Gate Supervisor</th>
-                                            <th>Time Parked</th>
-                                            <th>Cash </th>
+                                            <th>Duration</th>
+                                            <th>Cash</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for parkinglog in parkinglogs %}
+                                        {% for ParkingLog in ParkingLogs %}
                                         <tr>
                                             <th scope="row">1</th>
-                                            <td>{{parkinglog.date}}</td>
-                                            <td>{{parkinglog.platenum}}</td>
-                                            <td>{{parkinglog.entrygate}}</td>
-                                            <td>{{parkinglog.checkintime}}</td>
-                                            <td>{{parkinglog.checkouttime}}</td>
-                                            <td>{{parkinglog.exitgate}}</td>
-                                            <td>{{parkinglog.duration}}</td>
-                                            <td>{{parkinglog.duration}}</td>
+                                            <td>{{ParkingLog.date}}</td> 
+                                            <td>{{ParkingLog.platenum}}</td>
+                                            <td>{{ParkingLog.entrygate}}</td>
+                                            <td>{{ParkingLog.checkintime}}</td>
+                                            <!-- Checkout Time Logic -->
+                                            {% if ParkingLog.checkouttime == None %}
+                                                <td></td>
+                                            {% else %}
+                                                <td>{{ParkingLog.checkouttime}}</td>
+                                            {% endif %}
+                                            <!-- Exit Gate Logic -->
+                                            {% if ParkingLog.exitgate == None %}
+                                                <td></td>
+                                            {% else %}
+                                                <td>{{ParkingLog.exitgate}}</td>
+                                            {% endif %}
+                                            <!-- Duration Logic -->
+                                            {% if ParkingLog.duration == None %}
+                                                <td></td>
+                                            {% else %}
+                                                <td>{{ParkingLog.duration}}</td>
+                                            {% endif %}
+                                            <!-- Cash Collected Logic -->
+                                            {% if ParkingLog.cash == None %}
+                                                <td></td>
+                                            {% else %}
+                                                <td>{{ParkingLog.cash}} RWF</td>
+                                            {% endif %}
                                         </tr>
                                         {% endfor %}
                                     </tbody>

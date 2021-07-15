@@ -17,6 +17,18 @@ def dashboard_page(request):
     return render(request, 'Auth/dashboard.html')
 
 def all_vehicle_page(request):
+    context = dict
+    with conn.cursor() as cursor:
+        cursor.execute("""SELECT  "Date", "PlateNum", "EntryGateId", "CheckinTime", "CheckoutTime", "ExitGateId", "Status", "Duration", "Cash"
+                          FROM public."ParkingLog"
+                          WHERE "CustomerId" = 'EGPCI-AAA01-0001';""")
+        for i in cursor.fetchall():
+            ParkingLog = {"Date": i[0]}
+            ParkingLog['PlateNum'] = i[1]
+            
+    
+        
+        
     return render(request, 'Auth/all_vehicle.html')
 
 def pricing_page(request):

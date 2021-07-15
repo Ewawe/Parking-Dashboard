@@ -120,30 +120,20 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Time From</th>
-                                            <th>Time To</th>
-                                            <th>Cost</th>
+                                            <th>Time From (Minutes)</th>
+                                            <th>Time To (Minutes)</th>
+                                            <th>Cost (RWF)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {% for tarrif in tarrifs%}
                                         <tr>
                                             <th scope="row">1</th>
-                                            <td>0 h </td>
-                                            <td>1 h </td>
-                                            <td>200 Rwf</td>
+                                            <td>{{ tarrif.fromtime }} Min</td>
+                                            <td>{{ tarrif.totime }} Min</td>
+                                            <td>{{ tarrif.cost }} RWF</td>
                                         </tr>
-                                         <tr>
-                                            <th scope="row">2</th>
-                                            <td>1 h </td>
-                                            <td>2 h </td>
-                                            <td>300 Rwf</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>2 h </td>
-                                            <td>4 h </td>
-                                            <td>500 Rwf</td>
-                                        </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>

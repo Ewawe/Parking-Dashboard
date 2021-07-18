@@ -11,7 +11,10 @@ except:
 
 # Create your views here.
 def login_page(request):
-    return render(request, 'Auth/index.html')
+    user = request.POST.get
+    #if user:
+    print(user)
+    return render(request, 'Auth/login.html')
 
 def dashboard_page(request):
     context = dict
@@ -25,7 +28,7 @@ def dashboard_page(request):
                           
     return render(request, 'Auth/dashboard.html')
 
-def all_vehicle_page(request):
+def history_page(request):
     context = dict
     with conn.cursor() as cursor:
         cursor.execute("""SELECT  "Date", "PlateNum", "EntryGateId", "CheckinTime", "CheckoutTime", "ExitGateId", "Status", "Duration", "Cash"
@@ -46,7 +49,7 @@ def all_vehicle_page(request):
             
             ParkingLogs.append(ParkingLog) 
     context = {"ParkingLogs":ParkingLogs}
-    return render(request, 'Auth/all_vehicle.html',context)
+    return render(request, 'Auth/history.html',context)
 
 def pricing_page(request):
     context = dict
@@ -66,7 +69,7 @@ def pricing_page(request):
     return render(request, 'Auth/pricing.html', context)
 
 def today_page(request):
-    return render(request, 'Auth/today.html')
+    return render(request, 'Auth/parked.html')
 
 def user_page(request):
     return render(request, 'Auth/user.html')

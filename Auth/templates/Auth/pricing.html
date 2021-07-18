@@ -35,7 +35,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="navbar-logo">
                         <a href="javascript:void(0);" class="bars"></a>
-                        <a class="navbar-brand" href="index.html"><img src="{%static 'assets/images/logo.svg'%}" width="30" alt="Amaze"><span class="ml-2">Ewawe  Smart Parking</span></a>
+                        <a class="navbar-brand" href=""><img src="{%static 'assets/images/logo.svg'%}" width="30" alt="Amaze"><span class="ml-2">Ewawe  Smart Parking</span></a>
                     </div>
                     <div class="d-flex justify-content-end justify-content-md-between align-items-center flex-grow-1">
                         <div class="d-flex align-items-center currently_maintain hidden-xs">
@@ -55,7 +55,7 @@
                                     <img class="rounded-circle" src="{%static 'assets/images/profile_av.png'%}" alt="User">
                                 </a>
                                 <ul class="dropdown-menu">                           
-                                    <li><a href="index.html"><i class="icon-power mr-2"></i><span>Sign Out</span></a></li>
+                                    <li><a href="login.html"><i class="icon-power mr-2"></i><span>Sign Out</span></a></li>
                                 </ul>
                             </li>
                             <li><a href="javascript:void(0);" class="js-right-sidebar"><i class="icon-equalizer"></i></a></li>
@@ -74,23 +74,23 @@
                 <div class="menu">
                     <ul class="list">
                         <li class="header">MAIN</li>
-                        <li class="active open">
+                        <li>
                             <a href="dashboard.html" class="menu-toggle"><span>Dashboard</span></a>          
                         </li>
-                        <li>
-                            <a href="pricing.html" class="menu-toggle"><span>Parking Tarrif</span></a>
+                        <li class="active open">
+                            <a href="pricing.html" class="menu-toggle"><span>Pricing</span></a>
                     
                         </li>
                         <li>
-                            <a href="today.html" class="menu-toggle"><span>Current Parking</span></a>
+                            <a href="parked.html" class="menu-toggle"><span>Parked-Vehicles</span></a>
                 
                         </li>
                         <li>
-                            <a href="all_vehicle.html" class="menu-toggle"><span>Parking History</span></a>
+                            <a href="history.html" class="menu-toggle"><span>History</span></a>
                 
                         </li>
                         <li>
-                            <a href="user.html" class="menu-toggle"><span>User Management</span></a>
+                            <a href="user.html" class="menu-toggle"><span>System-Access</span></a>
                           
                         </li>               
                     </ul>
@@ -128,7 +128,7 @@
                                     <tbody>
                                         {% for tarrif in tarrifs%}
                                         <tr>
-                                            <th scope="row">1</th>
+                                            <th scope="row">{{forloop.counter}}</th>
                                             <td>{{ tarrif.fromtime }} Min</td>
                                             <td>{{ tarrif.totime }} Min</td>
                                             <td>{{ tarrif.cost }} RWF</td>

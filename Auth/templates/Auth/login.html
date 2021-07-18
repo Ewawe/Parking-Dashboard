@@ -48,17 +48,21 @@
                             <h5>Log in</h5>
                         </div>
 
-                        <form class="form mt-5">
+                        <form class="form mt-5" action="login.html" method="POST">
+                            {% csrf_token %}
                             <div class="form-group mb-1">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Email / User Name">
+                                    <input name="username" type="text" class="form-control" placeholder="Username">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Password">
+                                    <input name="password" type="password" class="form-control" placeholder="Password">
                                 </div>
                                 <a href="forgot-password.html" class="link font-13 float-right">Forgot Password?</a>
+                            </div>
+                            <div class="footer mt-3">
+                                <input type="submit" class="btn btn-secondary btn-block" value="Sign In">
                             </div>
                             <div class="mt-4">
                                 <label class="c_checkbox">
@@ -68,11 +72,7 @@
                                 </label>
                             </div>
                         </form>
-
-                        <div class="footer mt-3">
-                            <a href="dashboard.html" class="btn btn-secondary btn-block">SIGN IN</a>
-                        </div>
-                        <span>Don't have an account? <a href="sign-up.html" class="link">Sign up</a></span>
+                        <span>Don't have an account? <a href="dashboard.html" class="link">Explore Demo</a></span>
                     </div>
                 </div>
             </div>

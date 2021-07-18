@@ -11,9 +11,9 @@ except:
 
 # Create your views here.
 def login_page(request):
-    user = request.POST.get
-    #if user:
-    print(user)
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    
     return render(request, 'Auth/login.html')
 
 def dashboard_page(request):

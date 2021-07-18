@@ -34,14 +34,14 @@ class responses:
 
     #@login_required(login_url="login.html?next=dashboard.html")
     def dashboard_page(request):
-        print(request.session.get('is_auth'), 'hhh')
         if request.session.get('is_auth') == None or False:
             return redirect(responses.login_page) 
 
         else:
             context = models.dashboard_page_context.compile(request.session.get('user_id'))
+            print(context)
                                             
-            return render(request, 'Auth/dashboard.html')
+            return render(request, 'Auth/dashboard.html', context)
 
     def history_page(request):
         context = dict
@@ -65,7 +65,6 @@ class responses:
         return render(request, 'Auth/history.html',context)
 
     def pricing_page(request):
-        print(request.session.get('user_id'))
         context = dict
         with conn.cursor() as cursor:
             cursor.execute("""SELECT "FromTime", "ToTime", "Cost"
@@ -83,7 +82,6 @@ class responses:
         return render(request, 'Auth/pricing.html', context)
 
     def parked_page(request):
-        print(request.session.get('user_id'))
         context = dict
         with conn.cursor() as cursor:
             cursor.execute("""SELECT  "Date", "PlateNum", "EntryGateId", "CheckinTime", "CheckoutTime", "ExitGateId", "Status", "Duration", "Cash"

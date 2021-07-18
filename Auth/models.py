@@ -15,13 +15,20 @@ class dashboard_page_context:
     def compile(CustomerId):
         self = dict()
         self['Revenue'] = dashboard_page_context.revenue(CustomerId)
+        self['parked'] = dashboard_page_context.parked(CustomerId)
         return self
 
     def revenue(CustomerId):
         return {'Hul':'None'}
 
     def parked(CustomerId):
-        pass
+        with conn.cursor() as cursor:
+            cursor.execute("""SELECT  COUNT("Date") FROM public."ParkingLog" WHERE "CustomerId" = '{}' and "Status" = 'Parked';""".format(CustomerId))
+            parking = {'now':cursor.fetchall()[0][0]}
+            cursor.execute("""SELECT  COUNT("Date") FROM public."ParkingLog" WHERE "CustomerId" = '{}' and DATE("Date") = CURRENT_DATE;""".format(CustomerId))
+            parking['today']=cursor.fetchall()[0][0]
+            
+        return  parking
 
 class pricing_page_context:
     def compile(CustomerId=None):

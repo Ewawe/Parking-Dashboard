@@ -9,7 +9,6 @@ try:
 except:
     conn = psycopg2.connect(database="d7pibsdo79jogi",host="ec2-52-86-25-51.compute-1.amazonaws.com",port=5432,user="cccbiffnldwfkf",password="605444bcd83d702da6e7f56cb2fba0ebb74fb3db14dc5a0c1555bbfa75a357a1")
 
-
 # Create your models here.
 
 class dashboard_page_context:
@@ -21,7 +20,7 @@ class dashboard_page_context:
     def revenue(CustomerId):
         return {'Hul':'None'}
 
-    def parking(CustomerId):
+    def parked(CustomerId):
         pass
 
 class pricing_page_context:

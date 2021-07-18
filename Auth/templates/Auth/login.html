@@ -47,8 +47,12 @@
                         <div class="header">
                             <h5>Log in</h5>
                         </div>
-
-                        <form class="form mt-5" action="login.html" method="POST">
+                        <div class="header"  style = "position:relative; color:#FF0000; top:35px; left:5px">
+                        {% if code == 302 %}
+                                <h7>Wrong username or password</h7>
+                        {% endif %}
+                        </div>
+                        <form class="form mt-5" action="login" method="POST">
                             {% csrf_token %}
                             <div class="form-group mb-1">
                                 <div class="input-group">
@@ -72,7 +76,7 @@
                                 </label>
                             </div>
                         </form>
-                        <span>Don't have an account? <a href="dashboard.html" class="link">Explore Demo</a></span>
+                        <span>Don't have an account? <a href="dashboard" class="link">Explore Demo</a></span>
                     </div>
                 </div>
             </div>

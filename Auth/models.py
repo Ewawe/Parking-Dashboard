@@ -14,12 +14,18 @@ except:
 class dashboard_page_context:
     def compile(CustomerId):
         self = dict()
-        self['Revenue'] = dashboard_page_context.revenue(CustomerId)
+        self['revenue'] = dashboard_page_context.revenue(CustomerId)
         self['parked'] = dashboard_page_context.parked(CustomerId)
         return self
 
     def revenue(CustomerId):
-        return {'Hul':'None'}
+        with conn.cursor() as cursor:
+            cursor.execute("""SELECT  SUM("Cash") FROM public."ParkingLog" WHERE "CustomerId" = '{}' and "Status" = 'Exited' and DATE("Date") = CURRENT_DATE;""".format(CustomerId))
+            revenue = {'today':cursor.fetchall()[0][0]}
+            cursor.execute("""SELECT  COUNT("Cash") FROM public."ParkingLog" WHERE "CustomerId" = '{}' and DATE("Date") = CURRENT_DATE;""".format(CustomerId))
+            revenue['lastweek']=cursor.fetchall()[0][0]
+            
+        return revenue
 
     def parked(CustomerId):
         with conn.cursor() as cursor:

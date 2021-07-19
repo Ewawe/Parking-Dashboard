@@ -39,8 +39,6 @@ class responses:
 
         else:
             context = models.dashboard_page_context.compile(request.session.get('user_id'))
-            print(context)
-                                            
             return render(request, 'Auth/dashboard.html', context)
 
     def history_page(request):
@@ -107,3 +105,5 @@ class responses:
 
     def user_page(request):
         return render(request, 'Auth/user.html')
+
+

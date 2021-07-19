@@ -20,10 +20,11 @@ class dashboard_page_context:
 
     def revenue(CustomerId):
         with conn.cursor() as cursor:
-            cursor.execute("""SELECT  SUM("Cash") FROM public."ParkingLog" WHERE "CustomerId" = '{}' and "Status" = 'Exited' and DATE("Date") = CURRENT_DATE;""".format(CustomerId))
+            cursor.execute("""SELECT  SUM("Cash") FROM public."ParkingLog" WHERE "CustomerId" = '{}' and "Status" = 'Exited' and date("Date") = CURRENT_DATE;""".format(CustomerId))
             revenue = {'today':cursor.fetchall()[0][0]}
-            cursor.execute("""SELECT  COUNT("Cash") FROM public."ParkingLog" WHERE "CustomerId" = '{}' and DATE("Date") = CURRENT_DATE;""".format(CustomerId))
+            cursor.execute("""SELECT  COUNT("Cash") FROM public."ParkingLog" WHERE "CustomerId" = '{}';""".format(CustomerId))
             revenue['lastweek']=cursor.fetchall()[0][0]
+            print(revenue)
             
         return revenue
 

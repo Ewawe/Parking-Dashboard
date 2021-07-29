@@ -1,8 +1,11 @@
 from Auth import models
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, resolve_url
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 import os
 import psycopg2
+from . import engine
 
 try:
     DATABASE_URL = os.environ['DATABASE_URL']
@@ -12,105 +15,61 @@ except:
 
 # Create your views here.
 class responses:
-    def login_page(request):
+    def login_page(request, redirect_to=None):
         if request.method == "POST":
             username = request.POST.get('username')
             password = request.POST.get('password')
-            if username == 'admin':
-                if password == 'admin123':
-                    request.session['user_id'] = 'EGPCI-AAA01-0001'
-                    request.session['is_auth'] = True
-
-                    return redirect(responses.dashboard_page)
-                else:
-                    context={'msg':'Incorrect username or password!', 'code': 302 }
-                    return render(request, 'Auth/login.html', context)
-            
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect(reverse('dashboard_page'))
             else:
-                context={'msg':'Incorrect username or password!', 'code': 302 }
-                return render(request, 'Auth/login.html', context)
+                return render(request, 'Auth/login.html', {'code': 302})
         else:
             return render(request, 'Auth/login.html')
 
+    @login_required
     def dashboard_page(request):
-        if request.session.get('is_auth') == None or False:
-            return redirect(responses.login_page) 
+        context = engine.ParkingLog.compile('EGPCI-AAA01-0001')
 
-        else:
-            P = models.Parkinglog.objects.filter(customerid='EGPCI-AAA01-0001')
-            for logs in P.values():
-                print(logs['ticketid'])
-            return render(request, 'Auth/dashboard.html')
+        return render(request, 'Auth/dashboard.html', context)
 
+    @login_required
     def history_page(request):
-        context = dict
-        with conn.cursor() as cursor:
-            cursor.execute("""SELECT  "Date", "PlateNum", "EntryGateId", "CheckinTime", "CheckoutTime", "ExitGateId", "Status", "Duration", "Cash" FROM public."ParkingLog" WHERE "CustomerId" = '{0}';""".format(request.session.get('user_id')))
-            
-            ParkingLogs = []
-            for i in cursor.fetchall():
-                ParkingLog = {'date': i[0]}
-                ParkingLog['platenum'] = i[1]
-                ParkingLog['entrygate'] = i[2]
-                ParkingLog['checkintime'] = i[3]
-                ParkingLog['checkouttime'] = i[4]
-                ParkingLog['exitgate'] = i[5]
-                ParkingLog['status'] = i[6]
-                ParkingLog['duration'] = i[7]
-                ParkingLog['cash'] = i[8]
-                
-                ParkingLogs.append(ParkingLog) 
-        context = {"ParkingLogs":ParkingLogs}
-        return render(request, 'Auth/history.html',context)
+        context = engine.ParkingLog.compile('EGPCI-AAA01-0001')
+        return render(request, 'Auth/history.html', context)
 
+    @login_required
     def pricing_page(request):
-        context = dict
-        with conn.cursor() as cursor:
-            cursor.execute("""SELECT "FromTime", "ToTime", "Cost"
-                                FROM public."Tarrif"
-                                where "CustomerId" = 'EGPCI-AAA01-0001';""")
-            tarrifs = []
-            for i in cursor.fetchall():            
-                tarrif = {}
-                #tarrif['Id'] = i
-                tarrif['fromtime'] = i[0]
-                tarrif['totime'] = i[1]
-                tarrif['cost'] = i[2]
-                tarrifs.append(tarrif)         
-        context = {'tarrifs' : tarrifs} 
-        return render(request, 'Auth/pricing.html', context)
+        context = dict 
+        return render(request, 'Auth/pricing.html')
+    @login_required
+    def close_ticket(request, ticked_id):
+        ticket = models.Ticket.objects.get(ticketid=ticked_id)
+        print(ticket)
 
+        return redirect(reverse('parked_page'))
+
+
+    @login_required
     def parked_page(request):
-        context = dict
-        with conn.cursor() as cursor:
-            cursor.execute("""SELECT  "Date", "PlateNum", "EntryGateId", "CheckinTime", "CheckoutTime", "ExitGateId", "Status", "Duration", "Cash"
-                            FROM public."ParkingLog"
-                            WHERE "CustomerId" = 'EGPCI-AAA01-0001' and "Status" = 'Parked';""")
-            
-            parkedcars = []
-            for i in cursor.fetchall():
-                parkedcar = {'entry_date': i[0]}
-                parkedcar['platenum'] = i[1]
-                parkedcar['entrygate'] = i[2]
-                parkedcar['checkintime'] = i[3]
-                parkedcar['checkouttime'] = i[4]
-                parkedcar['exitgate'] = i[5]
-                parkedcar['status'] = i[6]
-                parkedcar['elapsed'] = i[7]
-                parkedcar['cash'] = i[8]
-                
-                parkedcars.append(parkedcar) 
-        context = {"parked_cars":parkedcars}
-
+        context = engine.ParkingLog.compile('EGPCI-AAA01-0001')['Parked']
         return render(request, 'Auth/parked.html', context)
 
+    @login_required
     def subscribers_page(request):
         context = {}
-        return render(request, 'Auth/subscription.html', context)
+        return render(request, 'Auth/subscription.html')
 
+    @login_required
     def user_page(request):
         if request.method == "POST":
             print(request.POST.dict())
         return render(request, 'Auth/user.html')
+
+    @login_required
+    def logout_request(request):
+        logout(request)
+        return redirect(reverse('logout_request'))
 
 

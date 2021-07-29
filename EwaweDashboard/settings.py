@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','ewawe-pms-dashboard.herokuapp.com']
 
+LOGIN_URL = 'login/'
+
 
 # Application definition
 

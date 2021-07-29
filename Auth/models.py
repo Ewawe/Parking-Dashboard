@@ -17,10 +17,6 @@ class Cameradef(models.Model):
     manufacturer = models.CharField(db_column='Manufacturer', max_length=50, blank=True, null=True)  # Field name made lowercase.
     origin = models.CharField(db_column='Origin', max_length=50, blank=True, null=True)  # Field name made lowercase.
 
-    class Meta:
-        managed = False
-        db_table = 'CameraDef'
-
 
 class Customers(models.Model):
     customerid = models.CharField(db_column='CustomerId', primary_key=True, max_length=50)  # Field name made lowercase.
@@ -43,9 +39,6 @@ class Customers(models.Model):
     comments = models.CharField(db_column='Comments', max_length=500, blank=True, null=True)  # Field name made lowercase.
     enrollmentdate = models.DateField(blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'Customers'
 
 
 class Gatesdef(models.Model):
@@ -56,10 +49,6 @@ class Gatesdef(models.Model):
     cashiername = models.CharField(db_column='CashierName', max_length=50, blank=True, null=True)  # Field name made lowercase.
     cameraid = models.CharField(db_column='CameraId', max_length=50, blank=True, null=True)  # Field name made lowercase.
 
-    class Meta:
-        managed = False
-        db_table = 'GatesDef'
-
 
 class Parkinglog(models.Model):
     ticketid = models.UUIDField(db_column='TicketId', primary_key=True)  # Field name made lowercase.
@@ -67,16 +56,13 @@ class Parkinglog(models.Model):
     date = models.DateField(db_column='Date')  # Field name made lowercase.
     platenum = models.CharField(db_column='PlateNum', max_length=50)  # Field name made lowercase.
     entrygateid = models.CharField(db_column='EntryGateId', max_length=50)  # Field name made lowercase.
-    checkintime = models.TimeField(db_column='CheckinTime')  # Field name made lowercase.
-    checkouttime = models.TimeField(db_column='CheckoutTime', blank=True, null=True)  # Field name made lowercase.
+    checkintime = models.BigIntegerField(db_column='CheckinTime')  # Field name made lowercase.
+    checkouttime = models.BigIntegerField(db_column='CheckoutTime', blank=True, null=True)  # Field name made lowercase.
     exitgateid = models.CharField(db_column='ExitGateId', max_length=50, blank=True, null=True)  # Field name made lowercase.
     status = models.CharField(db_column='Status', max_length=50, blank=True, null=True)  # Field name made lowercase.
     duration = models.FloatField(db_column='Duration', blank=True, null=True)  # Field name made lowercase.
     cash = models.FloatField(db_column='Cash', blank=True, null=True)  # Field name made lowercase.
 
-    class Meta:
-        managed = False
-        db_table = 'ParkingLog'
 
 
 class Tarrif(models.Model):
@@ -89,24 +75,21 @@ class Tarrif(models.Model):
     lastupdate = models.DateField(db_column='LastUpdate', blank=True, null=True)  # Field name made lowercase.
     updatelog = models.CharField(db_column='UpdateLog', max_length=50, blank=True, null=True)  # Field name made lowercase.
 
-    class Meta:
-        managed = False
-        db_table = 'Tarrif'
 
 
-class Users(models.Model):
+
+class Subcription:
     customerid = models.CharField(db_column='CustomerId', max_length=50)  # Field name made lowercase.
-    userid = models.CharField(max_length=50, blank=True, null=True)
-    fname = models.CharField(db_column='FName', max_length=50, blank=True, null=True)  # Field name made lowercase.
-    lname = models.CharField(db_column='LName', max_length=50, blank=True, null=True)  # Field name made lowercase.
-    email = models.CharField(db_column='Email', max_length=80, blank=True, null=True)  # Field name made lowercase.
-    mobile = models.CharField(db_column='Mobile', max_length=13, blank=True, null=True)  # Field name made lowercase.
-    position = models.CharField(db_column='Position', max_length=20, blank=True, null=True)  # Field name made lowercase.
-    comments = models.CharField(db_column='Comments', max_length=500, blank=True, null=True)  # Field name made lowercase.
-    status = models.CharField(db_column='Status', max_length=50, blank=True, null=True)  # Field name made lowercase.
-    enrollmentdate = models.DateField(blank=True, null=True)
-    password = models.CharField(db_column='Password', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    subscriptionid = models.CharField(db_column='SubscriptionId', max_length=50)  # Field name made lowercase.
+    platenumber = models.CharField(db_column='PlateNumber', max_length=50)  # Field name made lowercase.
+    subscription_date = models.DateField(db_column='SubscriptionDate')  # Field name made lowercase.
+    subscription_end_date = models.DateField(db_column='SubscriptionEndDate')  # Field name made lowercase.
+    subscription_type = models.CharField(db_column='SubscriptionType', max_length=50)  # Field name made lowercase.
+    subscription_status = models.CharField(db_column='SubscriptionStatus', max_length=50)  # Field name made lowercase.
+    subscription_amount = models.FloatField(db_column='SubscriptionAmount')  # Field name made lowercase.
+    contact_number = models.CharField(db_column='ContactNumber', max_length=50)  # Field name made lowercase.
+    office_location = models.CharField(db_column='OfficeLocation', max_length=50)  # Field name made lowercase.
+    parkingLot = models.CharField(db_column='ParkingLot', max_length=50)  # Field name made lowercase.
 
-    class Meta:
-        managed = False
-        db_table = 'Users'
+
+

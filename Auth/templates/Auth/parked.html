@@ -22,29 +22,24 @@
                                             <th>#</th>
                                             <th>Date</th>
                                             <th>Plate Number</th>
-                                            <th>Entry Logged by</th>
+                                            <th>Entry Gate</th>
                                             <th>Checkin time</th>
-                                            <th>Checkout Time</th>
-                                            <th>Exit logged by</th>
-                                            <th>Duration</th>
-                                            <th>Cash</th>
+                                            <th>Elapsed</th>
                                             <th>Close Ticket</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {% for parked_car in parked_cars %}
+                                    {% for Car in List %}
                                         <tr>
                                             <th scope="row">{{forloop.counter}}</th>
-                                            <td>{{parked_car.entry_date}}</td>
-                                            <td>{{parked_car.platenum}}</td>
-                                            <td>{{parked_car.log_entry}}</td>
-                                            <td>{{parked_car.checkintime}}</td>
-                                            <td>{{parked_car.exit_time}}</td>
-                                            <td>{{parked_car.log_exit}}</td>
-                                            <td>{{parked_car.elapsed}}</td>
-                                            <td>{{parked_car.cost}}</td>
+                                            <td>{{Car.Date}}</td>
+                                            <td>{{Car.PlateNum}}</td>
+                                            <td>{{Car.EntryGate}}</td>
+                                            <td>{{Car.Checkin}}</td>
+                                            <td>{{Car.Duration}} Minutes</td>
                                             <td>
-                                                <button class="btn btn-warning mb-3" data-toggle="modal" data-target="#closeTicket" style="color: #ffffff;"> <i class="zmdi zmdi-close"></i> Close Ticket</button>
+                                                {% comment %} <button class="btn btn-warning mb-3" data-toggle="modal" data-target="#closeTicket" style="color: #ffffff;"> <i class="zmdi zmdi-close"></i> Close Ticket</button>
+                                                {% endcomment %}<a href="history/{{Car.TicketId}}/close" class="btn btn-warning" role="button" data-bs-toggle="button">Close Ticket</a>
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -66,6 +61,7 @@
                 <div class="modal-header">
                     <h4 class="title" > Close Ticket </h4>
                 </div>
+                <form method="post" action="">
                 <div class="modal-body">
                     <div class="col-sm-12">
 
@@ -81,6 +77,7 @@
                     <button type="button" class="btn btn-primary waves-effect">Close Ticket</button>
                     <button type="button" class="btn btn-danger btn-simple waves-effect" data-dismiss="modal">Close</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>

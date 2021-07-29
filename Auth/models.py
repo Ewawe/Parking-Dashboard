@@ -1,64 +1,112 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-import psycopg2
-import os
 
 
-try:
-    DATABASE_URL = os.environ['DATABASE_URL']
-    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-except:
-    conn = psycopg2.connect(database="d7pibsdo79jogi",host="ec2-52-86-25-51.compute-1.amazonaws.com",port=5432,user="cccbiffnldwfkf",password="605444bcd83d702da6e7f56cb2fba0ebb74fb3db14dc5a0c1555bbfa75a357a1")
+class Cameradef(models.Model):
+    cameraid = models.CharField(db_column='CameraId', max_length=50)  # Field name made lowercase.
+    type = models.CharField(db_column='Type', max_length=50)  # Field name made lowercase.
+    modelnum = models.CharField(db_column='ModelNum', max_length=50)  # Field name made lowercase.
+    ipaddress = models.CharField(db_column='IpAddress', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    macaddress = models.CharField(db_column='MacAddress', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    manufacturer = models.CharField(db_column='Manufacturer', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    origin = models.CharField(db_column='Origin', max_length=50, blank=True, null=True)  # Field name made lowercase.
 
-# Create your models here.
-
-class dashboard_page_context:
-    def compile(CustomerId):
-        self = dict()
-        self['revenue'] = dashboard_page_context.revenue(CustomerId)
-        self['parked'] = dashboard_page_context.parked(CustomerId)
-        return self
-
-    def revenue(CustomerId):
-        with conn.cursor() as cursor:
-            cursor.execute("""SELECT  SUM("Cash") FROM public."ParkingLog" WHERE "CustomerId" = '{}' and "Status" = 'Exited' and date("Date") = CURRENT_DATE;""".format(CustomerId))
-            revenue = {'today':cursor.fetchall()[0][0]}
-            cursor.execute("""SELECT  COUNT(*) FROM public."ParkingLog";""".format(CustomerId))
-            revenue['lastweek']=cursor.fetchall()[0][0]
-            print(revenue)
-            
-        return revenue
-
-    def parked(CustomerId):
-        with conn.cursor() as cursor:
-            cursor.execute("""SELECT  COUNT("Date") FROM public."ParkingLog" WHERE "CustomerId" = '{}' and "Status" = 'Parked';""".format(CustomerId))
-            parking = {'now':cursor.fetchall()[0][0]}
-            cursor.execute("""SELECT  COUNT("Date") FROM public."ParkingLog" WHERE "CustomerId" = '{}' and DATE("Date") = CURRENT_DATE;""".format(CustomerId))
-            parking['today']=cursor.fetchall()[0][0]
-            
-        return  parking
-
-class pricing_page_context:
-    def compile(CustomerId=None):
-        if CustomerId == None:
-            CustomerId = 'EGPCI-AAA01-0001'
-            return pricing_page_context.tarrifs(CustomerId)
-        else:
-            return pricing_page_context.tarrifs(CustomerId)
-
-    def tarrifs(CustomerId):
-        with conn.cursor() as cursor:
-            cursor.execute("""SELECT "FromTime", "ToTime", "Cost"
-                              FROM public."Tarrif"
-                              where "CustomerId" = '{}';""".format(CustomerId))
-            tarrifs = []
-            for i in cursor.fetchall():            
-                tarrif = {}
-                tarrif['fromtime'] = i[0]
-                tarrif['totime'] = i[1]
-                tarrif['cost'] = i[2]
-                tarrifs.append(tarrif)         
-        return {'tarrifs' : tarrifs}
+    class Meta:
+        managed = False
+        db_table = 'CameraDef'
 
 
+class Customers(models.Model):
+    customerid = models.CharField(db_column='CustomerId', primary_key=True, max_length=50)  # Field name made lowercase.
+    clienttype = models.CharField(db_column='ClientType', max_length=70, blank=True, null=True)  # Field name made lowercase.
+    fname = models.CharField(db_column='FName', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    lname = models.CharField(db_column='LName', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    email = models.CharField(db_column='Email', max_length=80, blank=True, null=True)  # Field name made lowercase.
+    mobile = models.CharField(db_column='Mobile', max_length=13, blank=True, null=True)  # Field name made lowercase.
+    position = models.CharField(db_column='Position', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    companyname = models.CharField(db_column='CompanyName', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    companymail = models.CharField(db_column='CompanyMail', max_length=70, blank=True, null=True)  # Field name made lowercase.
+    companyid = models.CharField(db_column='CompanyId', max_length=30, blank=True, null=True)  # Field name made lowercase.
+    address = models.CharField(db_column='Address', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    sector = models.CharField(db_column='Sector', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    district = models.CharField(db_column='District', max_length=40, blank=True, null=True)  # Field name made lowercase.
+    city = models.CharField(db_column='City', max_length=30, blank=True, null=True)  # Field name made lowercase.
+    province = models.CharField(db_column='Province', max_length=30, blank=True, null=True)  # Field name made lowercase.
+    geolocation = models.CharField(db_column='GeoLocation', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    country = models.CharField(db_column='Country', max_length=30, blank=True, null=True)  # Field name made lowercase.
+    comments = models.CharField(db_column='Comments', max_length=500, blank=True, null=True)  # Field name made lowercase.
+    enrollmentdate = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Customers'
 
 
+class Gatesdef(models.Model):
+    gateid = models.CharField(db_column='GateId', max_length=50)  # Field name made lowercase.
+    customerid = models.CharField(db_column='CustomerId', max_length=50)  # Field name made lowercase.
+    flow = models.CharField(db_column='Flow', max_length=50)  # Field name made lowercase.
+    description = models.CharField(db_column='Description', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    cashiername = models.CharField(db_column='CashierName', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    cameraid = models.CharField(db_column='CameraId', max_length=50, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'GatesDef'
+
+
+class Parkinglog(models.Model):
+    ticketid = models.UUIDField(db_column='TicketId', primary_key=True)  # Field name made lowercase.
+    customerid = models.CharField(db_column='CustomerId', max_length=50)  # Field name made lowercase.
+    date = models.DateField(db_column='Date')  # Field name made lowercase.
+    platenum = models.CharField(db_column='PlateNum', max_length=50)  # Field name made lowercase.
+    entrygateid = models.CharField(db_column='EntryGateId', max_length=50)  # Field name made lowercase.
+    checkintime = models.TimeField(db_column='CheckinTime')  # Field name made lowercase.
+    checkouttime = models.TimeField(db_column='CheckoutTime', blank=True, null=True)  # Field name made lowercase.
+    exitgateid = models.CharField(db_column='ExitGateId', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    status = models.CharField(db_column='Status', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    duration = models.FloatField(db_column='Duration', blank=True, null=True)  # Field name made lowercase.
+    cash = models.FloatField(db_column='Cash', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'ParkingLog'
+
+
+class Tarrif(models.Model):
+    customerid = models.CharField(db_column='CustomerId', max_length=50)  # Field name made lowercase.
+    fromtime = models.FloatField(db_column='FromTime', blank=True, null=True)  # Field name made lowercase.
+    totime = models.FloatField(db_column='ToTime', blank=True, null=True)  # Field name made lowercase.
+    cost = models.FloatField(db_column='Cost', blank=True, null=True)  # Field name made lowercase.
+    initiatedby = models.CharField(db_column='Initiatedby', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    date = models.DateField(db_column='Date', blank=True, null=True)  # Field name made lowercase.
+    lastupdate = models.DateField(db_column='LastUpdate', blank=True, null=True)  # Field name made lowercase.
+    updatelog = models.CharField(db_column='UpdateLog', max_length=50, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Tarrif'
+
+
+class Users(models.Model):
+    customerid = models.CharField(db_column='CustomerId', max_length=50)  # Field name made lowercase.
+    userid = models.CharField(max_length=50, blank=True, null=True)
+    fname = models.CharField(db_column='FName', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    lname = models.CharField(db_column='LName', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    email = models.CharField(db_column='Email', max_length=80, blank=True, null=True)  # Field name made lowercase.
+    mobile = models.CharField(db_column='Mobile', max_length=13, blank=True, null=True)  # Field name made lowercase.
+    position = models.CharField(db_column='Position', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    comments = models.CharField(db_column='Comments', max_length=500, blank=True, null=True)  # Field name made lowercase.
+    status = models.CharField(db_column='Status', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    enrollmentdate = models.DateField(blank=True, null=True)
+    password = models.CharField(db_column='Password', max_length=50, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Users'

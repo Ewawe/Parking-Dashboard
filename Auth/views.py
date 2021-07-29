@@ -32,14 +32,15 @@ class responses:
         else:
             return render(request, 'Auth/login.html')
 
-    #@login_required(login_url="login.html?next=dashboard.html")
     def dashboard_page(request):
         if request.session.get('is_auth') == None or False:
             return redirect(responses.login_page) 
 
         else:
-            context = models.dashboard_page_context.compile(request.session.get('user_id'))
-            return render(request, 'Auth/dashboard.html', context)
+            P = models.Parkinglog.objects.filter(customerid='EGPCI-AAA01-0001')
+            for logs in P.values():
+                print(logs['ticketid'])
+            return render(request, 'Auth/dashboard.html')
 
     def history_page(request):
         context = dict
@@ -103,7 +104,13 @@ class responses:
 
         return render(request, 'Auth/parked.html', context)
 
+    def subscribers_page(request):
+        context = {}
+        return render(request, 'Auth/subscription.html', context)
+
     def user_page(request):
+        if request.method == "POST":
+            print(request.POST.dict())
         return render(request, 'Auth/user.html')
 
 

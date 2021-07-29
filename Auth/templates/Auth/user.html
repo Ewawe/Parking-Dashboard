@@ -1,107 +1,7 @@
+{% extends 'Auth/default.html' %}
 {% load static %}
-<!doctype html>
-<html class="no-js " lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
 
-<title>:: Ewawe  Smart Parking </title>
-<!-- Favicon-->
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="{%static 'assets/plugins/bootstrap/css/bootstrap.min.css'%}">
-<!-- Custom Css -->
-<link rel="stylesheet" href="{%static 'assets/css/amaze.style.min.css'%}">
-</head>
-
-<body class="font-ubuntu">
-
-<div id="body" class="theme-cyan">
-
-    <!-- Page Loader -->
-    <div class="page-loader-wrapper">
-        <div class="loader">
-            <div class="mt-3"><img class="zmdi-hc-spin w60" src="{%static 'assets/images/loader.svg'%}" alt="Amaze"></div>
-            <p>Please wait...</p>        
-        </div>
-    </div>
-
-    <div class="overlay"></div>
-
-     <!-- Top Bar -->
-     <nav class="top_navbar">
-        <div class="container">
-            <div class="row clearfix">
-                <div class="col-12">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="navbar-logo">
-                            <a href="javascript:void(0);" class="bars"></a>
-                            <a class="navbar-brand" href=""><img src="{%static 'assets/images/logo.svg'%}" width="30" alt="Amaze"><span class="ml-2">Ewawe  Smart Parking</span></a>
-                        </div>
-                        <div class="d-flex justify-content-end justify-content-md-between align-items-center flex-grow-1">
-                            <div class="d-flex align-items-center currently_maintain hidden-xs">
-                                <div class="dropdown">
-                                
-                                </div>
-                            </div>
-                            <ul class="navbar">
-                                <li class="search_bar hidden-sm">
-                                    <div class="input-group">
-                                        <i class="icon-magnifier"></i>
-                                        <input type="text" class="form-control" placeholder="Find your ...">
-                                    </div>
-                                </li>                     
-                                <li class="dropdown profile">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                                        <img class="rounded-circle" src="{%static 'assets/images/profile_av.png'%}" alt="User">
-                                    </a>
-                                    <ul class="dropdown-menu">                           
-                                        <li><a href="login"><i class="icon-power mr-2"></i><span>Sign Out</span></a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="javascript:void(0);" class="js-right-sidebar"><i class="icon-equalizer"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>        
-        </div>
-    </nav>
-
-    <aside id="leftsidebar" class="sidebar">
-        <div class="container">
-            <div class="row clearfix">
-                <div class="col-12">
-                    <div class="menu">
-                        <ul class="list">
-                            <li class="header">MAIN</li>
-                            <li>
-                                <a href="dashboard" class="menu-toggle"><span>Dashboard</span></a>          
-                            </li>
-                            <li>
-                                <a href="pricing" class="menu-toggle"><span>Pricing</span></a>
-                        
-                            </li>
-                            <li>
-                                <a href="parked" class="menu-toggle"><span>Parked-Vehicles</span></a>
-                    
-                            </li>
-                            <li>
-                                <a href="history" class="menu-toggle"><span>History</span></a>
-                    
-                            </li>
-                            <li class="active open">
-                                <a href="users" class="menu-toggle"><span>System-Access</span></a>
-                              
-                            </li>               
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </aside>
-
+{% block content %}
 
     <!-- Main Content -->
     <div class="body_area">
@@ -118,17 +18,39 @@
                         </div>
                         <div class="body">
                             <table class="table table-filter table-hover m-b-0">
-                                
-                                
+                                <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Full Name</th>
+                                            <th>Email</th>
+                                            <th>Phone Number</th>
+                                            <th>Role</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>                            
                                 <tbody>
                                     <tr data-status="approved">
                                         <td>1</td>
-                                        <td><div class="media-object"><img src="{%static 'assets/images/xs/avatar1.jpg'%}" alt="" width="35px" class="rounded-circle"></div> Accountant</td>
-                                        <td>jacob</td>
-                                        <td>jacob@gnail.com</td>
-                                
+                                        <td>Karangwa Donald</td>
+                                        <td>k.donald@gnail.com</td>
+                                        <td>0788293847</td>
+                                        <td>Gate Cashier</td>
                                         <td><span class="badge badge-success">Approved</span></td>
+                                        <td><button class="btn btn-warning mb-3" data-toggle="modal" data-target="#removeuser" style="color: #ffffff;"> <i class="zmdi zmdi-close"></i>View Profile</button></td>
+                                        
                                     </tr>
+                                    <tr data-status="approved">
+                                        <td>1</td>
+                                        <td>Kwizera Goliath</td>
+                                        <td>k.td@gnail.com</td>
+                                        <td>078824537</td>
+                                        <td>Gate Cashier</td>
+                                        <td><span class="badge badge-warning">Suspended</span></td>
+                                        <td><button class="btn btn-warning mb-3" data-toggle="modal" data-target="#removeuser" style="color: #ffffff;"> <i class="zmdi zmdi-close"></i>View Profile</button></td>
+                                        
+                                    </tr>
+                                    
                                     <tr data-status="suspended">
                                         <td>2</td>
                                         <td><div class="media-object"><img src="{%static 'assets/images/xs/avatar2.jpg'%}" alt="" width="35px" class="rounded-circle"></div>Data Entry</td>
@@ -179,6 +101,8 @@
 
     <!-- Modal Dialogs ========= --> 
     <!-- Default Size -->
+    <form method="POST" action="users">
+    {% csrf_token %}
     <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -187,92 +111,42 @@
                 </div>
                 <div class="modal-body"> 
                     <div class="col-sm-12">
+                        <label for="sel1">Full Name</label>
                         <div class="form-group col-sm-12">                                    
-                            <input type="text" class="form-control" placeholder="Full Name">
+                            <input id="NameField" name="Name" type="text" class="form-control" placeholder="Full Name">
                         </div>
+                        <label for="sel1">Email</label>
                         <div class="form-group col-sm-12">                                   
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input id="EmailField" name="Email" type="text" class="form-control" placeholder="E-mail">
                         </div>
+                        <label for="sel1">Password</label>
                         <div class="form-group col-sm-12">                                   
-                            <input type="number" class="form-control" placeholder="Phone">
+                            <input id="PasswordField" name="Password" type="password" class="form-control" placeholder="Password">
                         </div>
-                        <div class="col-sm-12">                                
-                            <select class="form-control">
-                                <option value=""> Choose Role</option>
-                                <option value="Accountant"> Accountant</option>
-                                <option value="Manager">    Manager</option>
-                            </select>
+                        <label for="sel1">Phone Number</label>
+                        <div class="form-group col-sm-12">                                   
+                            <input id="PhoneNumField" name="PhoneNum" type="number" class="form-control" placeholder="Phone">
+                        </div>
+                        <label for="sel1">Role</label>
+                        <div class="form-group col-sm-12">                                   
+                            <input id="RoleField" name="RoleNum" type="text" class="form-control" placeholder="Phone">
                         </div>
                     </div>
                 </div>
+
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary waves-effect">SAVE CHANGES</button>
+                    <button type="submit" class="btn btn-primary waves-effect">SAVE CHANGES</button>
                     <button type="button" class="btn btn-danger btn-simple waves-effect" data-dismiss="modal">CLOSE</button>
                 </div>
             </div>
         </div>
     </div>
+    </form>
 
-    <!-- Large Size -->
-    <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="title" id="largeModalLabel">Modal title</h4>
-                </div>
-                <div class="modal-body"> dignissim nibh faucibus ullamcorper.
-                    Fusce pulvinar libero vel ligula iaculis ullamcorper. Integer dapibus, mi ac tempor varius, purus
-                    nibh mattis erat, vitae porta nunc nisi non tellus. Vivamus mollis ante non massa egestas fringilla.
-                    Vestibulum egestas consectetur nunc at ultricies. Morbi quis consectetur nunc. </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect">SAVE CHANGES</button>
-                    <button type="button" class="btn btn-danger btn-simple waves-effect" data-dismiss="modal">CLOSE</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Small Size -->
-    <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="title" id="smallModalLabel">Modal title</h4>
-                </div>
-                <div class="modal-body"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sodales orci ante, sed ornare eros vestibulum ut. Ut accumsan
-                    vitae eros sit amet tristique. Nullam scelerisque nunc enim, non dignissim nibh faucibus ullamcorper.
-                    Fusce pulvinar libero vel ligula iaculis ullamcorper. </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect">SAVE CHANGES</button>
-                    <button type="button" class="btn btn-danger btn-simple waves-effect" data-dismiss="modal">CLOSE</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- For Material Design Colors -->
-    <div class="modal fade" id="colorModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content bg-pink">
-                <div class="modal-header">
-                    <h4 class="title" id="defaultModalLabel">Color Modal title</h4>
-                </div>
-                <div class="modal-body "> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sodales orci ante, sed ornare eros vestibulum ut. Ut accumsan
-                    vitae eros sit amet tristique. Nullam scelerisque nunc enim, non dignissim nibh faucibus ullamcorper.
-                    Fusce pulvinar libero vel ligula iaculis ullamcorper. Integer dapibus, mi ac tempor varius, purus
-                    nibh mattis erat, vitae porta nunc nisi non tellus. Vivamus mollis ante non massa egestas fringilla.
-                    Vestibulum egestas consectetur nunc at ultricies. Morbi quis consectetur nunc. </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-link waves-effect ">SAVE CHANGES</button>
-                    <button type="button" class="btn btn-link waves-effect " data-dismiss="modal">CLOSE</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </div>
 
-
+{% endblock %}
 <!-- Jquery Core Js --> 
 <script src="{%static 'assets/bundles/libscripts.bundle.js'%}"></script> <!-- Lib Scripts Plugin Js --> 
 <script src="{%static 'assets/bundles/vendorscripts.bundle.js'%}"></script> <!-- Lib Scripts Plugin Js --> 

@@ -31,36 +31,36 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for ParkingLog in ParkingLogs %}
+                                        {% for ParkingLog in List %}
                                         <tr>
                                             <th scope="row">{{forloop.counter}}</th>
-                                            <td>{{ParkingLog.date}}</td> 
-                                            <td>{{ParkingLog.platenum}}</td>
-                                            <td>{{ParkingLog.entrygate}}</td>
-                                            <td>{{ParkingLog.checkintime}}</td>
+                                            <td>{{ParkingLog.Date}}</td> 
+                                            <td>{{ParkingLog.PlateNum}}</td>
+                                            <td>{{ParkingLog.EntryGate}}</td>
+                                            <td>{{ParkingLog.Checkin}}</td>
                                             <!-- Checkout Time Logic -->
-                                            {% if ParkingLog.checkouttime == None %}
+                                            {% if ParkingLog.Checkout == None %}
                                                 <td></td>
                                             {% else %}
-                                                <td>{{ParkingLog.checkouttime}}</td>
+                                                <td>{{ParkingLog.Checkout}}</td>
                                             {% endif %}
                                             <!-- Exit Gate Logic -->
-                                            {% if ParkingLog.exitgate == None %}
+                                            {% if ParkingLog.ExitGate == None %}
                                                 <td></td>
                                             {% else %}
-                                                <td>{{ParkingLog.exitgate}}</td>
+                                                <td>{{ParkingLog.ExitGate}}</td>
                                             {% endif %}
                                             <!-- Duration Logic -->
-                                            {% if ParkingLog.duration == None %}
+                                            {% if ParkingLog.Duration == None %}
                                                 <td></td>
                                             {% else %}
-                                                <td>{{ParkingLog.duration}}</td>
+                                                <td>{{ParkingLog.Duration}}</td>
                                             {% endif %}
                                             <!-- Cash Collected Logic -->
-                                            {% if ParkingLog.cash == None %}
+                                            {% if ParkingLog.Cash == None %}
                                                 <td></td>
                                             {% else %}
-                                                <td>{{ParkingLog.cash}} RWF</td>
+                                                <td>{{ParkingLog.Cash}} RWF</td>
                                             {% endif %}
                                         </tr>
                                         {% endfor %}

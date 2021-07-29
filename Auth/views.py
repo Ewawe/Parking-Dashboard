@@ -36,7 +36,7 @@ class responses:
 
     @login_required
     def history_page(request):
-        context = engine.ParkingLog.compile('EGPCI-AAA01-0001')
+        context = engine.ParkingLog.compile('EGPCI-AAA01-0001')['History']
         return render(request, 'Auth/history.html', context)
 
     @login_required
